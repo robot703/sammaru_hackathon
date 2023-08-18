@@ -1,1 +1,1 @@
-# sammaru_hackathon
+# sammaru_hackerthon
