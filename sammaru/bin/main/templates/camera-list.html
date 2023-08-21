@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Camera List</title>
+</head>
+<body>
+    <h1>camera List</h1>
+    <table>
+        <tr>
+            <th>camera_1</th>
+            <th>camera_2</th>
+            <th>camera_3</th>
+            <th>camera_4</th>
+        </tr>
+        <tr th:each="camera : ${camera}">
+            <td th:text="${camera.camera_1}"></td>
+            <td th:text="${camera.camera_2}"></td>
+            <td th:text="${camera.camera_3}"></td>
+            <td th:text="${camera.camera_4}"></td>
+        </tr>
+    </table>
+</body>
+</html>
