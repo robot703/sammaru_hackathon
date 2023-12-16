@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&family=Nanum+Gothic:wght@800&family=Oswald:wght@700&family=Roboto:wght@400;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <title>haedal</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body style="font-family: 'Nanum Gothic', sans-serif">
+    <div id="imageContainer">
+      <div id="myModal" class="modal">
+        <span id="closeBtn" class="close">&times;</span>
+        <div class="modal-content">
+          <div id="warnframe">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <header><span id="maintext">HOME</span></header>
+    <div id="main">
+      <div id="section">
+        <div id="display1">
+          <div id="v6"><video style="display: none;" id="warn_camera"muted autoplay src="warn_camera.mp4"></video></div>
+          <div id="v5"><video id="m_camera" muted autoplay src="main.mp4"></video></div>
+          <img
+            id="warning" src="warning.png" alt="Warning Image"style="position: absolute; display: none"/>
+        </div>
+        <div id="display2">
+          <div id="video1">
+            <span id="spantext1">CCTV1</span>
+            <div id="v1">
+              <video muted autoplay id="camera1" src="RU.mp4"></video>
+            </div>
+          </div>
+          <div id="video2">
+            <span id="spantext2">CCTV2</span>
+            <div id="v2">
+              <video muted autoplay id="camera2" src="RL.mp4"></video>
+            </div>
+          </div>
+          <div id="video3">
+            <span id="spantext3">CCTV3</span>
+            <div id="v3">
+              <video muted autoplay id="camera3" src="LU.mp4"></video>
+            </div>
+          </div>
+          <div id="video4">
+            <span id="spantext4">CCTV4</span>
+            <div id="v4">
+              <video muted autoplay id="camera4" src="LL.mp4"></video>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside>
+        <button id="saveButton">SAVE</button>
+        <button id="cctv4button">CCTV4</button>
+        <button id="cctv3button">CCTV3</button>
+        <button id="cctv2button">CCTV2</button>
+        <button id="cctv1button">CCTV1</button>
+        <button id="homebutton">HOME</button>
+        <div id="log1">
+            <table id="table" class="table">
+                <thead>
+                  <tr>
+                    <th>no.</th>
+                    <th>date</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+          </div>
+          <div id="log2">
+            <table id="table" class="table">
+                <thead>
+                  <tr>
+                    <th>풍속</th>
+                    <th>풍향</th>
+                    <th>위도</th>
+                    <th>N/S</th>
+                    <th>경도</th>
+                    <th>E/W</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="wind-speed">6.7</td>
+                    <td id="wind-direction">304</td>
+                    <td id="latitude">-5.363806667</td>
+                    <td id="N/S">S</td>
+                    <td id="longitude">107.0108733</td>
+                    <td id="E/W">E</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+      </aside>
+    </div>
+    <script src="script.js"></script>
+    <script>
+      // 파일명 숫자 변수 초기화
+      let fileNumber = 1;
+    
+      $(function(){
+        $("#saveButton").on("click", function(){
+          // 캡쳐할 영역 선택
+          const captureArea = document.querySelector("#warn_camera");
+          
+          // 캡쳐 라이브러리를 통해서 선택한 영역을 canvas 오브젝트로 받고 이미지 파일로 리턴한다.
+          html2canvas(captureArea).then(canvas => {
+            // 이미지 파일명 생성
+            const filename = `row${fileNumber}.png`;
+    
+            // 파일명 숫자 증가
+            fileNumber++;
+    
+            saveAs(canvas.toDataURL('image/png'), filename);
+          });
+        });
+        
+        function saveAs(uri, filename) {
+          // 캡쳐된 파일을 이미지 파일로 내보낸다.
+          var link = document.createElement('a');
+          if (typeof link.download === 'string') {
+            link.href = uri;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          } else {
+            window.open(uri);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
